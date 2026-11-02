@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Informasi Stok & Katalog Buku</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="nav-links">
+            <a href="dashboard.html">&larr; Kembali ke Dashboard</a>
+        </div>
+        <h2>Informasi Stok / Katalog Buku</h2>
+        
+        <!-- Form Tambah Stok via JavaScript DOM -->
+        <div style="background: #ecf0f1; padding: 15px; border-radius: 5px; margin-bottom: 20px;">
+            <h3>Tambah Baris Stok Baru (DOM)</h3>
+            <input type="text" id="kode" placeholder="Kode Barang (Contoh: TI101)">
+            <input type="text" id="nama" placeholder="Nama Barang">
+            <input type="text" id="harga" placeholder="Harga (Contoh: Rp 100.000)">
+            <input type="number" id="stok" placeholder="Jumlah Stok">
+            <input type="text" id="cover" placeholder="Path Gambar (Contoh: img/buku1.png)">
+            <button type="button" onclick="tambahStokBaru()">Tambah ke Tabel</button>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Cover</th>
+                    <th>Kode</th>
+                    <th>Nama Buku</th>
+                    <th>Jenis</th>
+                    <th>Edisi</th>
+                    <th>Stok</th>
+                    <th>Harga</th>
+                </tr>
+            </thead>
+            <tbody id="bodyKatalog">
+                <!-- Data dimuat dinamis dari data.js -->
+            </tbody>
+        </table>
+    </div>
+
+    <script src="js/data.js"></script>
+    <script>
+        function muatKatalog() {
+            let tbody = document.getElementById('bodyKatalog');
+            tbody.innerHTML = "";
+            dataKatalogBuku.forEach(buku => {
+                tbody.innerHTML += `<tr>
+                    <td><img src="${buku.cover}" alt="Cover" class="img-cover" onerror="this.src='https://via.placeholder.com/45x65?text=No+Img'"></td>
+                    <td>${buku.kodeBarang}</td>
+                    <td>${buku.namaBarang}</td>
+                    <td>${buku.jenisBarang}</td>
+                    <td>${buku.edisi}</td>
+                    <td>${buku.stok}</td>
+                    <td>${buku.harga}</td>
+                </tr>`;
+            });
+        }
+
+        function tambahStokBaru() {
+            let kode = document.getElementById('kode').value;
+            let nama = document.getElementById('nama').value;
+            let harga = document.getElementById('harga').value;
+            let stok = document.getElementById('stok').value;
+            let cover = document.getElementById('cover').value || 'https://via.placeholder.com/45x65?text=No+Img';
+
+            if(!kode || !nama || !harga || !stok) {
+                alert("Semua kolom utama wajib diisi!");
+                return;
+            }
+
+            let tbody = document.getElementById('bodyKatalog');
+            let newRow = document.createElement('tr');
+            newRow.innerHTML = `
+                <td><img src="${cover}" alt="Cover" class="img-cover"></td>
+                <td>${kode}</td>
+                <td>${nama}</td>
+                <td>Buku Baru</td>
+                <td>1</td>
+                <td>${stok}</td>
+                <td>${harga}</td>
+            `;
+            tbody.appendChild(newRow);
+
+            // Reset input form
+            document.getElementById('kode').value = '';
+            document.getElementById('nama').value = '';
+            document.getElementById('harga').value = '';
+            document.getElementById('stok').value = '';
+            document.getElementById('cover').value = '';
+            alert("Baris stok baru berhasil ditambahkan!");
+        }
+
+        window.onload = muatKatalog;
+    </script>
+</body>
+</html>

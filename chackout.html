@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Halaman Pemesanan - Toko Buku Online</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Navigasi Kembali -->
+        <div class="nav-links">
+            <a href="dashboard.html">← Kembali ke Dashboard</a>
+        </div>
+
+        <h2>🛒 Form Pemesanan Buku</h2>
+        <p style="color: #64748b; margin-bottom: 25px;">Lengkapi formulir di bawah ini untuk melakukan pemesanan buku baru.</p>
+
+        <!-- Form Pemesanan -->
+        <form id="formCheckout">
+            <label for="namaPemesan">Nama Pemesan</label>
+            <input type="text" id="namaPemesan" placeholder="Masukkan nama lengkap" required>
+
+            <label for="pilihBuku">Pilih Buku</label>
+            <select id="pilihBuku" required>
+                <option value="">-- Pilih Buku --</option>
+                <option value="Perkembangan Anak Usia Dini">Perkembangan Anak Usia Dini - Rp 250.000</option>
+                <option value="Manajemen Keuangan">Manajemen Keuangan - Rp 180.000</option>
+                <option value="Kepemimpinan">Kepemimpinan - Rp 150.000</option>
+                <option value="Mikrobiologi">Mikrobiologi - Rp 220.000</option>
+                <option value="Pengantar Komunikasi">Pengantar Komunikasi - Rp 160.000</option>
+            </select>
+
+            <label for="jumlahPesanan">Jumlah Eksemplar</label>
+            <input type="number" id="jumlahPesanan" min="1" value="1" required>
+
+            <label for="alamatKirim">Alamat Pengiriman</label>
+            <input type="text" id="alamatKirim" placeholder="Masukkan alamat lengkap tujuan pengiriman" required>
+
+            <button type="submit">Proses Pesanan</button>
+        </form>
+
+        <hr style="border: none; border-top: 1px solid #e2e8f0; margin: 40px 0;">
+
+        <!-- Bagian History Transaksi di Halaman Pemesanan -->
+        <h3>📜 History / Riwayat Transaksi</h3>
+        <p style="color: #64748b; font-size: 14px; margin-bottom: 20px;">Daftar pesanan buku yang pernah Anda buat sebelumnya.</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>No. DO</th>
+                    <th>Judul Buku</th>
+                    <th>Jumlah</th>
+                    <th>Total Harga</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>DO-2026-001</strong></td>
+                    <td>Perkembangan Anak Usia Dini</td>
+                    <td>2 Eksemplar</td>
+                    <td>Rp 500.000</td>
+                    <td><span style="background: #dcfce7; color: #166534; padding: 4px 10px; border-radius: 6px; font-weight: 600; font-size: 12px;">Selesai</span></td>
+                </tr>
+                <tr>
+                    <td><strong>DO-2026-002</strong></td>
+                    <td>Manajemen Keuangan</td>
+                    <td>1 Eksemplar</td>
+                    <td>Rp 180.000</td>
+                    <td><span style="background: #fef3c7; color: #92400e; padding: 4px 10px; border-radius: 6px; font-weight: 600; font-size: 12px;">Dalam Pengiriman</span></td>
+                </tr>
+                <tr>
+                    <td><strong>DO-2026-003</strong></td>
+                    <td>Kepemimpinan</td>
+                    <td>3 Eksemplar</td>
+                    <td>Rp 450.000</td>
+                    <td><span style="background: #dcfce7; color: #166534; padding: 4px 10px; border-radius: 6px; font-weight: 600; font-size: 12px;">Selesai</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        // Script opsional untuk interaksi form checkout
+        const formCheckout = document.getElementById('formCheckout');
+        formCheckout.addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Pesanan berhasil diproses! Terima kasih telah berbelanja.');
+            formCheckout.reset();
+        });
+    </script>
+</body>
+</html>

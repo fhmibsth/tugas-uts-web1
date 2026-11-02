@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Login - Toko Buku Online</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container" style="max-width: 400px; margin-top: 100px;">
+        <h2>Login Toko Buku</h2>
+        <form id="formLogin">
+            <label>Email:</label>
+            <input type="email" id="email" required placeholder="Contoh: rina@gmail.com">
+            
+            <label>Password:</label>
+            <input type="password" id="password" required placeholder="Contoh: rina123">
+            
+            <button type="submit">Login</button>
+        </form>
+        <p style="text-align: center;">
+            <a href="#" onclick="bukaModal('modalLupa')">Lupa Password?</a> | 
+            <a href="#" onclick="bukaModal('modalDaftar')">Daftar</a>
+        </p>
+    </div>
+
+    <!-- Modal Lupa Password -->
+    <div id="modalLupa" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="tutupModal('modalLupa')">&times;</span>
+            <h3>Pemulihan Sandi</h3>
+            <p>Silakan hubungi administrator untuk mereset sandi akun Anda.</p>
+        </div>
+    </div>
+
+    <!-- Modal Daftar -->
+    <div id="modalDaftar" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="tutupModal('modalDaftar')">&times;</span>
+            <h3>Pendaftaran Akun</h3>
+            <p>Gunakan akun demo yang tersedia di data (misal: rina@gmail.com / rina123).</p>
+        </div>
+    </div>
+
+    <script src="js/data.js"></script>
+    <script>
+        document.getElementById('formLogin').addEventListener('submit', function(e) {
+            e.preventDefault();
+            let inputEmail = document.getElementById('email').value.trim();
+            let inputPass = document.getElementById('password').value.trim();
+
+            // Memeriksa pencocokan persis dari dataPengguna di file data.js
+            let user = typeof dataPengguna !== 'undefined' ? dataPengguna.find(u => u.email === inputEmail && u.password === inputPass) : null;
+            
+            if (user) {
+                alert("Login Berhasil! Selamat datang " + user.nama);
+                localStorage.setItem('currentUser', user.nama);
+                window.location.href = 'dashboard.html';
+            } else {
+                alert("Email atau password yang Anda masukkan salah!");
+            }
+        });
+
+        function bukaModal(id) { 
+            document.getElementById(id).style.display = 'block'; 
+        }
+        function tutupModal(id) { 
+            document.getElementById(id).style.display = 'none'; 
+        }
+
+        // Tutup modal ketika mengklik area di luar kotak modal
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>

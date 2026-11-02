@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard - Toko Buku Online</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Header Sambutan -->
+        <div class="dashboard-header">
+            <div>
+                <h2 id="greeting">Selamat Datang</h2>
+                <p>Halo, <span id="namaUser" style="font-weight: 600; color: #4f46e5;">User</span>. Silakan pilih menu navigasi di bawah ini untuk mengelola aplikasi.</p>
+            </div>
+            <div>
+                <a href="index.html" class="btn-logout">Logout</a>
+            </div>
+        </div>
+
+        <!-- Grid Kartu Menu Navigasi -->
+        <div class="menu-grid">
+            <a href="stok.html" class="menu-card">
+                <div class="card-icon">📚</div>
+                <h3>Informasi Stok / Katalog</h3>
+                <p>Lihat daftar buku lengkap, cek ketersediaan stok, dan tambah data buku baru via DOM.</p>
+            </a>
+
+            <a href="tracking.html" class="menu-card">
+                <div class="card-icon">🚚</div>
+                <h3>Tracking Pengiriman</h3>
+                <p>Lacak status pengiriman pesanan buku secara real-time menggunakan Nomor Delivery Order (DO).</p>
+            </a>
+
+            <a href="chackout.html" class="menu-card">
+                <div class="card-icon">🛒</div>
+                <h3>Halaman Pemesanan</h3>
+                <p>Buat pesanan buku baru, pilih metode pembayaran, dan isi alamat pengiriman dengan mudah.</p>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Mengambil nama user dari localStorage
+        let user = localStorage.getItem('currentUser') || 'Tamu';
+        document.getElementById('namaUser').innerText = user;
+
+        // Dynamic Greeting berdasarkan Local Time
+        let jam = new Date().getHours();
+        let ucapan = "Pagi";
+        if (jam >= 11 && jam < 15) {
+            ucapan = "Siang";
+        } else if (jam >= 15 && jam < 18) {
+            ucapan = "Sore";
+        } else if (jam >= 18) {
+            ucapan = "Malam";
+        }
+        document.getElementById('greeting').innerText = `Selamat ${ucapan}, ${user}!`;
+    </script>
+</body>
+</html>

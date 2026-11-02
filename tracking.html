@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Tracking Pengiriman</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="nav-links">
+            <a href="dashboard.html">&larr; Kembali ke Dashboard</a>
+        </div>
+        <h2>Tracking Pengiriman</h2>
+        <p>Coba gunakan Nomor DO contoh: <b>20230012</b> atau <b>20230013</b></p>
+
+        <label>Nomor Delivery Order (DO):</label>
+        <input type="text" id="inputDO" placeholder="Masukkan Nomor DO...">
+        <button type="button" onclick="cariTracking()">Cari</button>
+
+        <div id="hasilTracking" style="margin-top: 20px; display: none;">
+            <h3>Detail Pengiriman</h3>
+            <p><strong>Nama Pemesan:</strong> <span id="tNama"></span></p>
+            <p><strong>Status:</strong> <span id="tStatus" style="color: green; font-weight: bold;"></span></p>
+            <p><strong>Ekspedisi & Paket:</strong> <span id="tEkspedisi"></span> (<span id="tPaket"></span>)</p>
+            <p><strong>Tanggal Kirim:</strong> <span id="tTanggal"></span></p>
+            <p><strong>Total Pembayaran:</strong> <span id="tTotal"></span></p>
+
+            <h4>Riwayat Perjalanan:</h4>
+            <table>
+                <thead>
+                    <tr><th>Waktu</th><th>Keterangan</th></tr>
+                </thead>
+                <tbody id="tRiwayat"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="js/data.js"></script>
+    <script>
+        function cariTracking() {
+            let noDO = document.getElementById('inputDO').value.trim();
+            let data = dataTracking[noDO];
+            let containerHasil = document.getElementById('hasilTracking');
+
+            if (data) {
+                document.getElementById('tNama').innerText = data.nama;
+                document.getElementById('tStatus').innerText = data.status;
+                document.getElementById('tEkspedisi').innerText = data.ekspedisi;
+                document.getElementById('tPaket').innerText = data.paket;
+                document.getElementById('tTanggal').innerText = data.tanggalKirim;
+                document.getElementById('tTotal').innerText = data.total;
+
+                let tbody = document.getElementById('tRiwayat');
+                tbody.innerHTML = "";
+                data.perjalanan.forEach(item => {
+                    tbody.innerHTML += `<tr><td>${item.waktu}</td><td>${item.keterangan}</td></tr>`;
+                });
+
+                containerHasil.style.display = 'block';
+            } else {
+                alert("Nomor Delivery Order (DO) tidak ditemukan!");
+                containerHasil.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
